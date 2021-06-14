@@ -13,7 +13,13 @@
   margin-right: auto;
   margin-left: auto;
 }
-
+.login__error{
+    width: 300px;
+    border: 1px solid #f0c14b;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 8px;
+}
 .login__container {
     width: 300px;
     height: fit-content;

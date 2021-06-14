@@ -1,11 +1,25 @@
+import React, {  useEffect } from "react";
 import './App.css';
 import Header from './components/Header';
 import Home from './components/Home';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Checkout from './components/Checkout';
 import Login from './components/Login';
+import { auth } from './firebase'
+import { setUser } from './store/user/action'
+import { connect } from "react-redux"
 
-function App() {
+function App(props) {
+
+  useEffect(() => {
+    auth.onAuthStateChanged(authUser => {
+      if (authUser) {
+        props.setUser(authUser)
+      } else {
+      }
+    })
+  }, [])
+
   return (
     // BEM
     <Router>
@@ -28,4 +42,5 @@ function App() {
   );
 }
 
-export default App;
+// export default App;
+export default connect(null, {setUser})(App);

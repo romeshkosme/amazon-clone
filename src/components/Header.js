@@ -4,12 +4,21 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux"
+import { auth } from '../firebase';
+import { setUser } from '../store/user/action'
 // import { addToBasket } from '../store/amazon/actions'
 
 class Header extends Component {
-    // constructor() {
-    //     super()
+    // constructor(props) {
+    //     super(props)
     // }
+
+    handleAuthentication = () => {
+        if (this.props.user) {
+            auth.signOut();
+            this.props.setUser(null)
+        }
+    }
 
     render() {
         return (
@@ -33,14 +42,14 @@ class Header extends Component {
                 </div>
 
                 <div className="header__nav">
-                    <Link to="/login">
-                        <div className="header__option">
+                    <Link to={!this.props.user && "/login"}>
+                        <div onClick={this.handleAuthentication} className="header__option">
                             <span className="header__optionLineOne">
                                 Hello Guest
-                        </span>
+                            </span>
                             <span className="header__optionLineTwo">
-                                Sign In
-                        </span>
+                                {this.props.user ? 'Sign Out': 'Sign In'}
+                            </span>
                         </div>
                     </Link>
                     <div className="header__option">
@@ -79,7 +88,8 @@ class Header extends Component {
 
 const mapStateToProps = state => {
     const { basket } = state.Reducer;
-    return { basket };
+    const { user } = state.UserReducer
+    return { basket, user };
 }
 
-export default connect(mapStateToProps, null)(Header)
+export default connect(mapStateToProps, {setUser})(Header)

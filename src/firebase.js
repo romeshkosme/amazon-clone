@@ -1,8 +1,17 @@
+import firebase from 'firebase';
+
 const firebaseConfig = {
-    apiKey: "AIzaSyDIXua2M_sx_Z5APf2CJXEtLAQ4GHhxadw",
-    authDomain: "clone-e5996.firebaseapp.com",
-    projectId: "clone-e5996",
-    storageBucket: "clone-e5996.appspot.com",
-    messagingSenderId: "662364363038",
-    appId: "1:662364363038:web:70c7b3ef25fcf59e1a910f"
+    apiKey: "AIzaSyB3nd4682HGm9im55J_dvLfg3vNfgHmjEE",
+    authDomain: "amzon-clone-d2c2c.firebaseapp.com",
+    projectId: "amzon-clone-d2c2c",
+    storageBucket: "amzon-clone-d2c2c.appspot.com",
+    messagingSenderId: "930033319618",
+    appId: "1:930033319618:web:7dda824e4187186d8c855b"
 };
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+const db = firebaseApp.firestore();
+const auth = firebase.auth();
+
+export { db, auth };
