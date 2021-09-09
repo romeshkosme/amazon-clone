@@ -14,6 +14,7 @@ class Checkout extends Component {
             <div className="checkout">
                 <div className="checkout__left">
                     <div>
+                        {this.props.user && <h3>Hello, {this.props.user.email}</h3>}                        
                         <h2 className="checkout__title">
                             Your Shopping Cart {this.props.basket?.length}
                         </h2>
@@ -42,9 +43,11 @@ class Checkout extends Component {
 
 // export default Checkout
 const mapStateToProps = state => {
+    console.log("state -- ", state)
+    const { user } = state.UserReducer
     const { basket } = state.Reducer;
-    console.log("this.propd :: ", basket)
-    return { basket };
+    console.log("email -- ", user)
+    return { basket, user };
 }
 
 export default connect(mapStateToProps, null)(Checkout)
